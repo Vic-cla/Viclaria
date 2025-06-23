@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Viclaria 💖</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #ffe6f0, #ffe6ff);
+      overflow-x: hidden;
+      color: #333;
+      transition: background 0.5s ease, color 0.5s ease;
+    }
+
+    .container {
+      text-align: center;
+      padding: 40px;
+    }
+
+    h1 {
+      font-size: 3em;
+      color: #e60073;
+      margin-bottom: 10px;
+    }
+
+    .date {
+      font-size: 1.2em;
+      color: #555;
+      margin-bottom: 10px;
+    }
+
+    #countdown {
+      font-size: 1.3em;
+      color: #e60073;
+      margin-bottom: 40px;
+      font-weight: 600;
+    }
+
+    .message {
+      background: #fff;
+      padding: 30px;
+      border-radius: 20px;
+      max-width: 700px;
+      margin: 0 auto;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      font-size: 1.2em;
+      line-height: 1.8;
+      transition: background 0.5s ease, color 0.5s ease;
+    }
+
+    .photo {
+      margin-top: 30px;
+    }
+
+    .photo img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      transition: box-shadow 0.5s ease;
+    }
+
+    .footer {
+      margin-top: 50px;
+      font-size: 1em;
+      color: #777;
+      transition: color 0.5s ease;
+    }
+
+    .heart {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      background-color: #ff4d88;
+      top: -10px;
+      border-radius: 50%;
+      animation: fall 5s linear infinite;
+      z-index: -1;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    audio {
+      display: none;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    #reveal-btn {
+      animation: pulse 1.5s infinite;
+      background-color: #ff66b2;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 20px;
+      color: white;
+      font-size: 1em;
+      cursor: pointer;
+      margin-top: 20px;
+      box-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    #theme-toggle {
+      margin-top: 20px;
+      padding: 10px 20px;
+      border-radius: 20px;
+      border: none;
+      cursor: pointer;
+      font-size: 1em;
+      background: #e60073;
+      color: white;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    #theme-toggle:hover {
+      background-color: #b30059;
+      box-shadow: 0 0 12px rgba(179, 0, 89, 0.7);
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 2em;
+      }
+
+      .message {
+        font-size: 1em;
+        padding: 20px;
+      }
+
+      #reveal-btn {
+        padding: 10px 15px;
+        font-size: 0.9em;
+      }
+    }
+
+    /* Dark Theme Styles */
+    body.dark-theme {
+      background: linear-gradient(to bottom right, #2a1a2b, #3b2241);
+      color: #f9d5e5;
+    }
+
+    body.dark-theme h1,
+    body.dark-theme #countdown,
+    body.dark-theme .date {
+      color: #ffb3c6;
+    }
+
+    body.dark-theme .message,
+    body.dark-theme .secret-container,
+    body.dark-theme #gift-content {
+      background: #4b2e4d;
+      color: #ffe6f0;
+      box-shadow: 0 10px 25px rgba(255, 182, 193, 0.3);
+    }
+
+    body.dark-theme .footer {
+      color: #cc99bb;
+    }
+
+    body.dark-theme #reveal-btn,
+    body.dark-theme #theme-toggle {
+      background-color: #ff99bb;
+      color: #3b2241;
+      box-shadow: 0 0 10px rgba(255, 153, 187, 0.7);
+    }
+
+    body.dark-theme .heart {
+      background-color: #ff99bb;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Viclaria 💖</h1>
+    <div class="date">Together since: 19th December 2023</div>
+    <div id="countdown"></div>
+
+    <div class="message">
+      <p><strong>To my dearest Clarice,</strong></p>
+      <p>
+        Every day with you feels like a blessing I never saw coming. Your smile brightens my world, and your heart is where I find peace. You've shown me what love truly means — not just in words, but in every little moment we share.
+      </p>
+      <p>
+        I may not always have the perfect words, but know this: I choose you, again and again. Through the good days and the hard ones, you’re the reason my heart beats with hope.
+      </p>
+      <p>
+        You’re not just part of my life — you are my life.
+      </p>
+      <p><em>With all my love,<br>Victor</em></p>
+    </div>
+
+    <div class="photo">
+      <img src="viclaria-photo.jpg" alt="Victor and Clarice">
+    </div>
+
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" aria-label="Toggle Theme">Switch to Night Mode</button>
+
+    <div class="footer">
+      Made with ❤️ by Victor for Clarice
+    </div>
+  </div>
+
+  <!-- Floating hearts -->
+  <script>
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (3 + Math.random() * 2) + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }
+    setInterval(createHeart, 300);
+  </script>
+
+  <!-- Background Music -->
+  <audio id="bg-music" autoplay loop preload="auto" muted>
+    <source src="dance-alone.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    // Unmute and play the audio on first user interaction
+    function unmuteAudio() {
+      const audio = document.getElementById('bg-music');
+      if (audio.muted) {
+        audio.muted = false;
+        audio.play();
+      }
+      document.removeEventListener('click', unmuteAudio);
+      document.removeEventListener('touchstart', unmuteAudio);
+    }
+    document.addEventListener('click', unmuteAudio);
+    document.addEventListener('touchstart', unmuteAudio);
+  </script>
+
+  <!-- Secret Love Notes -->
+  <div class="secret-container">
+    <button id="reveal-btn">💗 Tap to Reveal a Secret 💗</button>
+    <div id="secret-note-container"></div>
+  </div>
+
+  <!-- Surprise Gift -->
+  <div id="final-message" style="display: none; margin-top: 30px;">
+    <p style="font-size: 1.2em; color: #cc0066;">
+      🎉 This isn’t the end of the surprises… it’s just the beginning of us. 🎉
+    </p>
+    <button id="open-gift">🎁 Open Your Gift 🎁</button>
+  </div>
+
+  <div id="gift-content" style="display: none; margin-top: 20px; background: #fff0f5; padding: 20px; border-radius: 20px; max-width: 600px; margin-left: auto; margin-right: auto; box-shadow: 0 5px 20px rgba(0,0,0,0.1); color: #b30059;">
+    <h3>💖 My Forever Letter to You 💖</h3>
+    <p>
+      Clarice, you’ve unlocked every piece of my heart.  
+      Every moment with you is a memory I want to keep forever.  
+      This love is real, and it’s ours to grow, to protect, and to celebrate every day.  
+      I’m yours, now and always.  
+      <br><br>With all my love,  
+      <br>— Victor 💌
+    </p>
+  </div>
+
+  <style>
+    .secret-container {
+      text-align: center;
+      margin-top: 50px;
+      transition: background 0.5s ease, color 0.5s ease;
+    }
+
+    #reveal-btn {
+      background-color: #ff4da6;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.1em;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #reveal-btn:hover {
+      background-color: #e60073;
+    }
+
+    .love-note {
+      display: none;
+      margin-top: 20px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      background: #fff0f5;
+      border: 1px solid #ffb6c1;
+      padding: 20px;
+      border-radius: 20px;
+      font-size: 1.1em;
+      color: #cc0066;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      animation: fadeIn 1s ease forwards;
+      transition: background 0.5s ease, color 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+
+  <script>
+    const revealBtn = document.getElementById('reveal-btn');
+    const secretContainer = document.getElementById('secret-note-container');
+    const finalMessage = document.getElementById('final-message');
+    const openGiftBtn = document.getElementById('open-gift');
+    const giftContent = document.getElementById('gift-content');
+
+    const loveNotes = [
+      "Clarice, from the first moment we spoke, my heart knew it found something special. ❤️",
+      "You light up my world in ways I can’t explain. With you, every day feels like a love song. 🎶",
+      "I’ll always be here — not just today, not just tomorrow, but for the beautiful forever I see with you. 💍",
+      "You’re my calm in chaos, my smile in sadness, my forever in a world of temporary. 🌍💘",
+      "If I had to choose between breathing and loving you… I’d use my last breath to say ‘I love you’. 😘"
+    ];
+
+    let currentNote = 0;
+
+    // Helper: Smooth scroll to an element
+    function scrollToBottomOf(element) {
+      setTimeout(() => {
+        element.scrollIntoView({ behavior: 'smooth', block: 'end' });
+      }, 200);
+    }
+
+    revealBtn.addEventListener('click', () => {
+      if (currentNote < loveNotes.length) {
+        const noteDiv = document.createElement('div');
+        noteDiv.classList.add('love-note');
+        noteDiv.textContent = loveNotes[currentNote];
+        secretContainer.appendChild(noteDiv);
+        noteDiv.style.display = 'block';
+        currentNote++;
+
+        scrollToBottomOf(noteDiv);
+        const hint = document.createElement('div');
+        hint.textContent = "There’s more... keep revealing 💖";
+        hint.style.fontSize = "0.9em";
+        hint.style.color = "#cc0066";
+        hint.style.marginTop = "5px";
+        noteDiv.appendChild(hint);
+
+        if (currentNote === loveNotes.length) {
+          revealBtn.style.display = "none";
+          finalMessage.style.display = "block";
+          scrollToBottomOf(finalMessage);
+        }
+      }
+    });
+
+    openGiftBtn.addEventListener('click', () => {
+      giftContent.style.display = 'block';
+      openGiftBtn.style.display = 'none';
+      scrollToBottomOf(giftContent);
+    });
+
+    // Countdown Timer Script
+    const countdownEl = document.getElementById('countdown');
+    const nextAnniversary = new Date('2025-12-19T00:00:00');
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = nextAnniversary - now;
+
+      if (diff <= 0) {
+        countdownEl.textContent = "Happy Anniversary! 🎉❤️";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      countdownEl.textContent = `Countdown to next anniversary: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // Theme toggle logic
+    const themeToggleBtn = document.getElementById('theme-toggle');
+
+    function setTheme(theme) {
+      if (theme === 'dark') {
+        document.body.classList.add('dark-theme');
+        themeToggleBtn.textContent = "Switch to Day Mode";
+      } else {
+        document.body.classList.remove('dark-theme');
+        themeToggleBtn.textContent = "Switch to Night Mode";
+      }
+      localStorage.setItem('theme', theme);
+    }
+
+    // Load saved theme or default to light
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    setTheme(savedTheme);
+
+    themeToggleBtn.addEventListener('click', () => {
+      const currentTheme = document.body.classList.contains('dark-theme') ? 'dark' : 'light';
+      setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+    });
+  </script>
+
+</body>
+</html>
